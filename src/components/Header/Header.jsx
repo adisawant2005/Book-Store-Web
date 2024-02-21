@@ -40,12 +40,18 @@ const Header = () => {
           </Link>
         </li>
         <li className="basis-1/12 flex justify-center pt-4">
-          <Link to="#" className="text-white text-center">
+          <Link
+            to="http://localhost:5173/login"
+            className="text-white text-center"
+          >
             <button className="text-2xl btn btn-primary p-2">Login</button>
           </Link>
         </li>
         <li className="basis-1/12 flex justify-center pt-4">
-          <Link to="#" className="text-white text-center">
+          <Link
+            to="http://localhost:5173/signup"
+            className="text-white text-center"
+          >
             <button className="text-2xl btn btn-secondary p-2">Signup</button>
           </Link>
         </li>
