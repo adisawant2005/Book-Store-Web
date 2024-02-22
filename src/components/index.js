@@ -7,6 +7,10 @@ import Signup from "./Signup/Signup";
 import Cart from "./Cart/Cart";
 import Order from "./Order/Order";
 import Authentication from "./Authentication/Authentication";
+import FAQs from "./FAQs/FAQs";
+import About from "./About/About";
+import CustomerCare from "./CustomerCare/CustomerCare";
+import BookStoreStartPage from "./BookStoreStartPage/BookStoreStartPage";
 
 export {
   Header,
@@ -18,4 +22,8 @@ export {
   Cart,
   Order,
   Authentication,
+  About,
+  FAQs,
+  CustomerCare,
+  BookStoreStartPage,
 };
