@@ -1,3 +1,7 @@
+# Book Store Website
+
+This a mini project to create a MERN stack website
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
