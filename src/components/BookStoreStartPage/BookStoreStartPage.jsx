@@ -1,11 +1,7 @@
 const BookStoreStartPage = () => {
   return (
-    <div className="w-screen h-screen overflow-hidden">
-      <img
-        src="https://www.shutterstock.com/shutterstock/photos/1458761897/display_1500/stock-vector-read-more-books-set-for-book-lovers-various-books-stack-of-books-notebooks-hand-drawn-1458761897.jpg"
-        alt="Book Store Start Page"
-        className="w-screen h-[111vh]"
-      />
+    <div className=" overflow-hidden bg-[url(book-1835799_1280.jpg)] w-screen h-[100vh] bg-no-repeat bg-cover">
+      <h1 className="text-9xl text-white m-12">Books for Everyone</h1>
     </div>
   );
 };

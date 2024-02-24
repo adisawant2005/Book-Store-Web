@@ -11,7 +11,7 @@ const App = () => {
         setFrontPageDisplay(false);
         setFirstLoad(false);
         console.log("Delayed for 1 second.");
-      }, "3000");
+      }, "2000");
     }
   }, [firstLoad, frontPageDisplay]);
 

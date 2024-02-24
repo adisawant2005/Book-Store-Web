@@ -31,12 +31,15 @@ const Header = ({ handleSidebarDisable }) => {
           </div>
         </li>
         <li className="basis-1/12 flex justify-center ">
-          <Link to="#" className="text-white text-center my-auto">
+          <Link
+            to="http://localhost:5173/order"
+            className="text-white text-center my-auto"
+          >
             <h1 className="text-2xl font-semibold p-2">Orders</h1>
           </Link>
         </li>
         <li className="basis-1/12 flex justify-center my-auto">
-          <Link to="#" className="invert h-16">
+          <Link to="http://localhost:5173/cart" className="invert h-16">
             <PiShoppingCartDuotone size={"4em"} />
           </Link>
         </li>
