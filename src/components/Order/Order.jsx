@@ -3,16 +3,25 @@ import { Link } from "react-router-dom";
 const Order = () => {
   return (
     <main>
-      <h1 className="text-5xl text-cyan-600 font-semibold m-4">Orders</h1>
+      <div className="w-full text-5xl text-cyan-600 border-b-2 pt-4 font-semibold ">
+        <h1 className="mx-4">Orders</h1>
+      </div>
       <div>
-        <div>
-          <ul name="OrderDetails" className="text-2xl text-slate-700 flex m-8 ">
-            <li className=" basis-4/12 text-center">Product</li>
-            <li className=" basis-2/12 text-center">Product Details</li>
-            <li className=" basis-2/12 text-center">Order No</li>
-            <li className=" basis-2/12 text-center">Order Date</li>
-            <li className=" basis-1/12 text-center">Amount</li>
-            <li className=" basis-1/12 text-center">Status</li>
+        <div className="">
+          <ul
+            name="OrderDetails"
+            className="text-2xl text-slate-700 flex pt-4 px-4 "
+          >
+            <li className="border-b-4 mx-1 basis-4/12 text-center">Product</li>
+            <li className="border-b-4 mx-1 basis-2/12 text-center">
+              Product Details
+            </li>
+            <li className="border-b-4 mx-1 basis-2/12 text-center">Order No</li>
+            <li className="border-b-4 mx-1 basis-2/12 text-center">
+              Order Date
+            </li>
+            <li className="border-b-4 mx-1 basis-1/12 text-center">Amount</li>
+            <li className="border-b-4 mx-1 basis-1/12 text-center">Status</li>
           </ul>
         </div>
         <ul name="Orders" className="text-xl text-slate-500 flex flex-col m-8 ">
