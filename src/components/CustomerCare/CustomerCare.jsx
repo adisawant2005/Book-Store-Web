@@ -1,7 +1,7 @@
 const CustomerCare = () => {
   return (
-    <main className="border-8 bg-[url(CutomerCare.jpg)] w-screen h-[150vh] bg-contain bg-no-repeat bg-center">
-      <h1>Customer Care</h1>
+    <main className="border-8 bg-[url(CutomerCare.jpg)] w-full h-[90vh] bg-cover bg-no-repeat bg-center">
+      <h1 className="text-8xl text-cyan-500">Customer Care</h1>
     </main>
   );
 };
