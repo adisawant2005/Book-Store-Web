@@ -21,7 +21,7 @@ const Home = ({ className }) => {
           <div className="flex flex-col">
             <Link to="">
               <img
-                src="https://imgs.search.brave.com/avalo0gj4lAoEilI82FO20QOFfoF6WtrhFEE-P46rZg/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFCRTdlZUt6QUwu/anBn"
+                src={import.meta.env.VITE_ROOT_PATH + "/RichDadPoorDad.webp"}
                 className=" h-64"
                 alt="Rich Dad Poor Dad"
               />

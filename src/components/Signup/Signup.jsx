@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { nanoid } from "nanoid";
 import countryList from "../../assets/countryList";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
+  const [accountExits, setAccountExits] = useState(true);
+  const accountAlreadyExistsMsg =
+    "Account already exists. Please try with another email.";
+
   const [passwords, setPasswords] = useState({
     password: "",
     confirmPassword: "",
@@ -43,25 +51,7 @@ const SignUp = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (passwordsMatch) {
-      console.log(formData);
-      // const data = await fetch("http://localhost:3000/accounts", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
-    } else {
-      console.log("Passwords not confirmed");
-    }
-  };
-
   const currentDate = new Date().toISOString().split("T")[0];
-
   const calculateAge = () => {
     const birthDate = new Date(formData.birthdate);
     const currentDate = new Date();
@@ -74,6 +64,7 @@ const SignUp = () => {
     console.log(formData.age);
   };
 
+  const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -87,8 +78,50 @@ const SignUp = () => {
     postalCode: "",
     phoneNumber: "",
     birthdate: "",
-    profilePicture: "",
   });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const apiEndpoint = "http://localhost:3000/accounts";
+
+    // Create a FormData object
+    const formDataToSend = new FormData();
+
+    // Append the file to the FormData object
+    formDataToSend.append("avatar", file);
+
+    // Append form data properties
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
+
+    if (passwordsMatch) {
+      console.log(formData);
+
+      try {
+        // Making a POST request using Axios to upload the file and send form data
+        const response = await axios.post(apiEndpoint, formDataToSend, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        // Handle the response
+        if (response.data.success) {
+          setAccountExits(true);
+          console.log("Account created successfully", response.data);
+          navigate("/");
+        } else if (!response.data.success) {
+          setAccountExits(false);
+          console.log("Account already exists", response.data);
+        }
+      } catch (error) {
+        // Handle any errors that occurred during the file upload
+        console.error("Error uploading file:", error.message);
+      }
+    } else {
+      console.log("Passwords not confirmed");
+    }
+  };
 
   useEffect(() => {
     console.log("using Effecct");
@@ -99,11 +132,42 @@ const SignUp = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+    console.log(file);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-300">
       <div className="bg-white md:w-[80%] w-[100%] p-8 rounded shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
-        <form onSubmit={handleSubmit}>
+        <div className="flex flex-col">
+          <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
+          <span className="text-red-500 text-sm">
+            {!accountExits && accountAlreadyExistsMsg}
+          </span>
+        </div>
+        <form
+          name="signUp"
+          method="POST"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
+          <div className="mb-4">
+            <label
+              htmlFor="avatar"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Profile picture
+            </label>
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              onChange={handleFileChange}
+              className="p-2 w-full border-4 border-blue-500 rounded-md"
+            />
+          </div>
           <div className="grid grid-cols-3 gap-4">
             <div className="mb-4">
               <label
@@ -357,12 +421,17 @@ const SignUp = () => {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="bg-blue-700 btn text-white px-4 py-2 rounded-md"
-          >
-            Sign Up
-          </button>
+          <div className="flex flex-col">
+            <button
+              type="submit"
+              className="bg-blue-700 btn text-white px-4 py-2 rounded-md"
+            >
+              Sign Up
+            </button>
+            <span className="text-red-500 text-sm">
+              {!accountExits && accountAlreadyExistsMsg}
+            </span>
+          </div>
         </form>
       </div>
     </div>
