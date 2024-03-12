@@ -16,7 +16,7 @@ const Sidebar = ({ disable }) => {
         className="flex items-center mb-3 text-white"
       >
         <img
-          src="https://imgs.search.brave.com/phjZaPINChylZwLhVDjhrhav1CszhgGQIHbxMYTbZQ0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zeW1i/bC13b3JsZC5ha2Ft/YWl6ZWQubmV0L2kv/d2VicC9kOS8yYzU2/NGRkOTNjOTFmMGZj/Y2M2MTgzNjNiZjNh/YzQud2VicA"
+          src={import.meta.env.VITE_ROOT_PATH + "/BookLogo.webp"}
           alt="Side Bar Image"
           className="w-12"
         />
