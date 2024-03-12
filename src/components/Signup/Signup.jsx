@@ -25,12 +25,8 @@ const SignUp = () => {
     if (e.target.value === passwords.confirmPassword) {
       setPasswordsMatch(true);
       setFormData({ ...formData, password: e.target.value });
-      console.log("Password matched");
-      console.log(passwords);
     } else {
       setPasswordsMatch(false);
-      console.log("Password did not match");
-      console.log(passwords);
     }
   };
 
@@ -42,26 +38,9 @@ const SignUp = () => {
     if (e.target.value === passwords.password) {
       setPasswordsMatch(true);
       setFormData({ ...formData, password: e.target.value });
-      console.log("Password matched");
-      console.log(passwords);
     } else {
       setPasswordsMatch(false);
-      console.log("Password did not match");
-      console.log(passwords);
     }
-  };
-
-  const currentDate = new Date().toISOString().split("T")[0];
-  const calculateAge = () => {
-    const birthDate = new Date(formData.birthdate);
-    const currentDate = new Date();
-    const timeDifference = currentDate - birthDate;
-    const yearDifference = Math.floor(
-      timeDifference / (365.25 * 24 * 60 * 60 * 1000)
-    );
-    setFormData({ ...formData, age: yearDifference });
-    console.log("formData.age before Re-rendering");
-    console.log(formData.age);
   };
 
   const [file, setFile] = useState(null);
@@ -70,7 +49,6 @@ const SignUp = () => {
     password: "",
     firstName: "",
     lastName: "",
-    age: "",
     gender: "",
     country: "",
     city: "",
@@ -86,17 +64,13 @@ const SignUp = () => {
     // Create a FormData object
     const formDataToSend = new FormData();
 
-    // Append the file to the FormData object
     formDataToSend.append("avatar", file);
 
-    // Append form data properties
     Object.entries(formData).forEach(([key, value]) => {
       formDataToSend.append(key, value);
     });
 
     if (passwordsMatch) {
-      console.log(formData);
-
       try {
         // Making a POST request using Axios to upload the file and send form data
         const response = await axios.post(apiEndpoint, formDataToSend, {
@@ -105,28 +79,19 @@ const SignUp = () => {
           },
         });
 
-        // Handle the response
         if (response.data.success) {
           setAccountExits(true);
-          console.log("Account created successfully", response.data);
           navigate("/");
         } else if (!response.data.success) {
           setAccountExits(false);
-          console.log("Account already exists", response.data);
         }
       } catch (error) {
-        // Handle any errors that occurred during the file upload
-        console.error("Error uploading file:", error.message);
+        console.log(error);
       }
-    } else {
-      console.log("Passwords not confirmed");
     }
   };
 
-  useEffect(() => {
-    console.log("using Effecct");
-    calculateAge();
-  }, [formData.birthdate]);
+  const currentDate = new Date();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -134,8 +99,6 @@ const SignUp = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
-    console.log(file);
   };
 
   return (
