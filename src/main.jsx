@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import "./index.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home,
@@ -12,6 +14,7 @@ import {
   FAQs,
   About,
   CustomerCare,
+  AccountPage,
 } from "./components";
 
 const router = createBrowserRouter([
@@ -51,12 +54,18 @@ const router = createBrowserRouter([
         path: "/customercare",
         element: <CustomerCare />,
       },
+      {
+        path: "/accountpage",
+        element: <AccountPage />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

@@ -1,20 +1,24 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsCartCheck } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
 import { RiCustomerService2Line } from "react-icons/ri";
+import { MdOutlineLogin } from "react-icons/md";
+import { VscSignIn } from "react-icons/vsc";
+import { FaQuoteRight } from "react-icons/fa6";
+import { LuBookMarked } from "react-icons/lu";
 
 const Sidebar = ({ disable }) => {
+  const [activeTab, setActiveTab] = useState("Home");
   return (
     <div
       className={`${
         disable ? "hidden" : "block"
-      } flex flex-col w-56 p-3 h-screen bg-slate-700`}
+      } flex flex-col w-56 p-3 mb-0 h-screen bg-slate-700`}
     >
-      <Link
-        to="http://localhost:5173/"
-        className="flex items-center mb-3 text-white"
-      >
+      <Link to="/" className="flex items-center mb-3 text-white font-medium">
         <img
           src={import.meta.env.VITE_ROOT_PATH + "/BookLogo.webp"}
           alt="Side Bar Image"
@@ -23,9 +27,17 @@ const Sidebar = ({ disable }) => {
         <span className="text-3xl p-3">Sidebar</span>
       </Link>
       <hr />
-      <ul className="flex flex-col text-xl">
-        <li className="nav-item">
-          <Link to="http://localhost:5173/" className="flex text-slate-950">
+      <ul className="flex flex-col text-xl my-4">
+        <li className="">
+          <Link
+            to="/"
+            onClick={() => setActiveTab("Home")}
+            className={`flex ${
+              activeTab === "Home"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
             <span className="mt-1">
               <IoHomeOutline />
             </span>
@@ -33,7 +45,15 @@ const Sidebar = ({ disable }) => {
           </Link>
         </li>
         <li>
-          <Link to="http://localhost:5173/cart" className="flex text-white">
+          <Link
+            to="/cart"
+            onClick={() => setActiveTab("cart")}
+            className={`flex ${
+              activeTab === "cart"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
             <span className="mt-1">
               <TiShoppingCart />
             </span>
@@ -41,17 +61,78 @@ const Sidebar = ({ disable }) => {
           </Link>
         </li>
         <li>
-          <Link to="http://localhost:5173/order" className="flex text-white">
+          <Link
+            to="/order"
+            onClick={() => setActiveTab("order")}
+            className={`flex ${
+              activeTab === "order"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
             <span className="mt-1">
               <BsCartCheck />
             </span>
             &nbsp;Orders
           </Link>
         </li>
+        <li className="">
+          <Link
+            to="/accountpage"
+            onClick={() => setActiveTab("account")}
+            className={`flex ${
+              activeTab === "account"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <FaRegUser />
+            </span>
+            &nbsp; Account
+          </Link>
+        </li>
         <li>
           <Link
-            to="http://localhost:5173/customercare"
-            className="flex text-white"
+            to="/faqs"
+            onClick={() => setActiveTab("faqs")}
+            className={`flex ${
+              activeTab === "faqs"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <FaQuoteRight />
+            </span>
+            &nbsp;FAQ's
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/about"
+            onClick={() => setActiveTab("about")}
+            className={`flex ${
+              activeTab === "about"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <LuBookMarked />
+            </span>
+            &nbsp;About
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/customercare"
+            onClick={() => setActiveTab("customercare")}
+            className={`flex ${
+              activeTab === "customercare"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
           >
             <span className="mt-1">
               <RiCustomerService2Line />
@@ -59,50 +140,40 @@ const Sidebar = ({ disable }) => {
             &nbsp;Customer Care
           </Link>
         </li>
+        <li>
+          <Link
+            to="/login"
+            onClick={() => setActiveTab("login")}
+            className={`flex ${
+              activeTab === "login"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <MdOutlineLogin />
+            </span>
+            &nbsp;Lognin
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/signup"
+            onClick={() => setActiveTab("signup")}
+            className={`flex ${
+              activeTab === "signup"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <VscSignIn />
+            </span>
+            &nbsp;Signup
+          </Link>
+        </li>
       </ul>
       <hr />
-      <div className="dropdown">
-        <Link
-          to="#"
-          className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt=""
-            width="32"
-            height="32"
-            className="rounded-circle me-2"
-          />
-          <strong>mdo</strong>
-        </Link>
-        <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li>
-            <Link className="dropdown-item" to="#">
-              New project...
-            </Link>
-          </li>
-          <li>
-            <Link className="dropdown-item" to="#">
-              Settings
-            </Link>
-          </li>
-          <li>
-            <Link className="dropdown-item" to="#">
-              Profile
-            </Link>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <Link className="dropdown-item" to="#">
-              Sign out
-            </Link>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };

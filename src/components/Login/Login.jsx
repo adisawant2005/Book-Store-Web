@@ -1,14 +1,20 @@
 import { useState } from "react";
 import axios from "axios";
+import Spinner from "../Spinner/Spinner";
+import { useSelector, useDispatch } from "react-redux";
+import { getAccountData } from "../../store/account";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [queryParams, setQueryParams] = useState({
     email: "",
     password: "",
   });
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const account = useSelector((state) => state.account);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setQueryParams({ ...queryParams, [e.target.name]: e.target.value });
@@ -22,17 +28,16 @@ const Login = () => {
       const response = await axios.get("http://localhost:3000/accounts", {
         params: queryParams,
       });
+
+      dispatch(getAccountData(response.data));
       setError("");
-      if (response.status === 201) {
-        console.log(response.data);
-        setData(response.data);
-      }
+      navigate("/");
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setError("Invalid email or password");
+        setError("Invalid password");
         console.error("Unauthorized. Please check your credentials.");
       } else if (error.response && error.response.status === 404) {
-        setError("Account not found");
+        setError("Invalid email");
         console.error("Resource not found. Please check your request.");
       } else {
         console.error("Unexpected status code:", error.response.status);
@@ -42,9 +47,11 @@ const Login = () => {
     }
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  setTimeout(() => {
+    if (loading) {
+      return <Spinner />;
+    }
+  }, 1000);
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -85,7 +92,9 @@ const Login = () => {
                 required
                 className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
-              {error === "Invalid email or password" ? error : ""}
+              <span className="text-red-500 text-sm">
+                {error === "Invalid email" ? error : ""}
+              </span>
             </div>
           </div>
 
@@ -107,7 +116,9 @@ const Login = () => {
                 required
                 className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
-              {error === "Account not found" ? error : ""}
+              <span className="text-red-500 text-sm">
+                {error === "Invalid password" ? error : ""}
+              </span>
             </div>
           </div>
 
@@ -118,10 +129,11 @@ const Login = () => {
             >
               Sign in
             </button>
-            {error !== "Invalid email or password" &&
-            error !== "Account not found"
-              ? error
-              : ""}
+            <span className="text-red-500 text-sm">
+              {error !== "Invalid email" && error !== "Invalid password"
+                ? error
+                : ""}
+            </span>
           </div>
         </form>
       </div>

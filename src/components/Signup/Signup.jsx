@@ -47,14 +47,14 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     gender: "",
     country: "",
     city: "",
-    streetAddress: "",
-    postalCode: "",
-    phoneNumber: "",
+    street_address: "",
+    postal_code: "",
+    phone_number: "",
     birthdate: "",
   });
   const handleSubmit = async (e) => {
@@ -134,16 +134,16 @@ const SignUp = () => {
           <div className="grid grid-cols-3 gap-4">
             <div className="mb-4">
               <label
-                htmlFor="firstName"
+                htmlFor="first_name"
                 className="block text-sm font-medium text-gray-600"
               >
                 First Name
               </label>
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
+                id="first_name"
+                name="first_name"
+                value={formData.first_name}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
                 required
@@ -151,16 +151,16 @@ const SignUp = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="lastName"
+                htmlFor="last_name"
                 className="block text-sm font-medium text-gray-600"
               >
                 Last Name
               </label>
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
                 required
@@ -332,16 +332,16 @@ const SignUp = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="streetAddress"
+                htmlFor="street_address"
                 className="block text-sm font-medium text-gray-600"
               >
                 Street Address
               </label>
               <input
                 type="text"
-                id="streetAddress"
-                name="streetAddress"
-                value={formData.streetAddress}
+                id="street_address"
+                name="street_address"
+                value={formData.street_address}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
                 required
@@ -349,16 +349,16 @@ const SignUp = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="postalCode"
+                htmlFor="postal_code"
                 className="block text-sm font-medium text-gray-600"
               >
-                postalCode
+                Postal Code
               </label>
               <input
                 type="number"
-                id="postalCode"
-                name="postalCode"
-                value={formData.postalCode}
+                id="postal_code"
+                name="postal_code"
+                value={formData.postal_code}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
                 required
@@ -366,16 +366,16 @@ const SignUp = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="phoneNumber"
+                htmlFor="phone_number"
                 className="block text-sm font-medium text-gray-600"
               >
-                phoneNumber
+                Phone Number
               </label>
               <input
                 type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
+                id="phone_number"
+                name="phone_number"
+                value={formData.phone_number}
                 onChange={handleChange}
                 pattern="^[0-9 +()-]*$"
                 placeholder="Enter phone number"

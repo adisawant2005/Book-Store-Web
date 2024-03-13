@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LoginAndSignupButton from "./LoginAndSignupButton";
+import AccountLogo from "./AccountLogo";
+import { useSelector, useDispatch } from "react-redux";
 import { PiShoppingCartDuotone } from "react-icons/pi";
 import { IoReorderThree } from "react-icons/io5";
 import { IoMdSearch } from "react-icons/io";
 
 const Header = ({ handleSidebarDisable }) => {
+  const accountData = useSelector((state) => state.account.data);
+  const [userLogin, setUserLogin] = useState();
+
+  useEffect(() => {
+    setUserLogin(accountData.success);
+  }, [accountData]);
+
   return (
     <nav className=" w-full bg-slate-700">
       <ul className="flex flex-row justify-between h-full">
@@ -15,16 +25,20 @@ const Header = ({ handleSidebarDisable }) => {
             </button>
           </Link>
         </li>
-        <li className="basis-5/12 flex justify-center h-full ">
+        <li
+          className={`${
+            userLogin ? "basis-6/12" : "basis-5/12"
+          } flex justify-center h-full `}
+        >
           <div className="flex flex-row w-full my-3 rounded-md bg-slate-600 border-4 border-slate-900">
             <input
               type="text"
               id="searchBar"
               placeholder="Enter the book you NEED"
-              className="rounded-s-sm text-2xl w-full outline-none"
+              className="rounded-s-sm px-2 text-2xl w-full outline-none"
             />
             <label htmlFor="searchBar">
-              <button className="translate-y-1 hover:-translate-y-0.5 hover:transition">
+              <button className=" p-2 hover:-translate-y-0.5 hover:transition">
                 <IoMdSearch size={"2em"} />
               </button>
             </label>
@@ -43,26 +57,7 @@ const Header = ({ handleSidebarDisable }) => {
             <PiShoppingCartDuotone size={"4em"} />
           </Link>
         </li>
-        <li className="basis-1/12 flex justify-center ">
-          <Link
-            to="http://localhost:5173/login"
-            className="text-white text-center my-auto"
-          >
-            <button className="text-2xl btn btn-primary px-2 py-1 rounded-md">
-              Login
-            </button>
-          </Link>
-        </li>
-        <li className="basis-1/12 flex justify-center ">
-          <Link
-            to="http://localhost:5173/signup"
-            className="text-white text-center my-auto"
-          >
-            <button className="text-2xl btn btn-secondary px-2 py-1 rounded-md">
-              Signup
-            </button>
-          </Link>
-        </li>
+        {userLogin ? <AccountLogo /> : <LoginAndSignupButton />}
       </ul>
     </nav>
   );
