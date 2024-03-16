@@ -12,6 +12,7 @@ import About from "./About/About";
 import CustomerCare from "./CustomerCare/CustomerCare";
 import BookStoreStartPage from "./BookStoreStartPage/BookStoreStartPage";
 import AccountPage from "./AccountPage/AccountPage";
+import ItemPage from "./ItemPage/ItemPage";
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   CustomerCare,
   BookStoreStartPage,
   AccountPage,
+  ItemPage,
 };

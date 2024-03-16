@@ -1,17 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateAccountData } from "../../store/account";
 import { IoHomeOutline } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsCartCheck } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { RiCustomerService2Line } from "react-icons/ri";
-import { MdOutlineLogin } from "react-icons/md";
+import { TbLogout, TbLogin2 } from "react-icons/tb";
 import { VscSignIn } from "react-icons/vsc";
 import { FaQuoteRight } from "react-icons/fa6";
 import { LuBookMarked } from "react-icons/lu";
 
 const Sidebar = ({ disable }) => {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("Home");
+
+  const hsndleLogout = () => {
+    dispatch(
+      updateAccountData({
+        success: null,
+        message: "",
+        result: {
+          email: "",
+          password: "",
+          first_name: "",
+          last_name: "",
+          age: 0,
+          gender: "",
+          country: "",
+          city: "",
+          street_address: "",
+          postal_code: "",
+          phone_number: "",
+          birthdate: "",
+          profile_picture_address: "",
+        },
+      })
+    );
+  };
+
   return (
     <div
       className={`${
@@ -151,7 +179,7 @@ const Sidebar = ({ disable }) => {
             }`}
           >
             <span className="mt-1">
-              <MdOutlineLogin />
+              <TbLogin2 />
             </span>
             &nbsp;Lognin
           </Link>
@@ -170,6 +198,25 @@ const Sidebar = ({ disable }) => {
               <VscSignIn />
             </span>
             &nbsp;Signup
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/"
+            onClick={() => {
+              setActiveTab("logout");
+              hsndleLogout();
+            }}
+            className={`flex ${
+              activeTab === "logout"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <TbLogout />
+            </span>
+            &nbsp;Lognout
           </Link>
         </li>
       </ul>

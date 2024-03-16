@@ -4,11 +4,25 @@ const initialState = {
   data: {
     success: null,
     message: "",
-    result: {},
+    result: {
+      email: "",
+      password: "",
+      first_name: "",
+      last_name: "",
+      age: 0,
+      gender: "",
+      country: "",
+      city: "",
+      street_address: "",
+      postal_code: "",
+      phone_number: "",
+      birthdate: "",
+      profile_picture_address: "",
+    },
   },
 };
 
-export const counterSlice = createSlice({
+export const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
@@ -22,6 +36,6 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { getAccountData, updateAccountData } = counterSlice.actions;
+export const { getAccountData, updateAccountData } = accountSlice.actions;
 
-export default counterSlice.reducer;
+export default accountSlice.reducer;

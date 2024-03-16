@@ -15,6 +15,7 @@ import {
   About,
   CustomerCare,
   AccountPage,
+  ItemPage,
 } from "./components";
 
 const router = createBrowserRouter([
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "/accountpage",
+        element: <AccountPage />,
+      },
+      {
+        path: "/itempage",
+        element: <ItemPage />,
+      },
+      {
         path: "/cart",
         element: <Cart />,
       },
@@ -53,10 +62,6 @@ const router = createBrowserRouter([
       {
         path: "/customercare",
         element: <CustomerCare />,
-      },
-      {
-        path: "/accountpage",
-        element: <AccountPage />,
       },
     ],
   },

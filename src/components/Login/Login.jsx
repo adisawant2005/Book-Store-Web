@@ -13,7 +13,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const account = useSelector((state) => state.account);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,8 +23,9 @@ const Login = () => {
     try {
       e.preventDefault();
       setLoading(true);
+      const apiEndpoint = "http://localhost:3000/accounts";
       // Use Axios to make a GET request with query parameters
-      const response = await axios.get("http://localhost:3000/accounts", {
+      const response = await axios.get(apiEndpoint, {
         params: queryParams,
       });
 
