@@ -16,7 +16,7 @@ const Sidebar = ({ disable }) => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("Home");
 
-  const hsndleLogout = () => {
+  const handleLogout = () => {
     dispatch(
       updateAccountData({
         success: null,
@@ -26,7 +26,7 @@ const Sidebar = ({ disable }) => {
           password: "",
           first_name: "",
           last_name: "",
-          age: 0,
+          age: -1,
           gender: "",
           country: "",
           city: "",
@@ -205,7 +205,7 @@ const Sidebar = ({ disable }) => {
             to="/"
             onClick={() => {
               setActiveTab("logout");
-              hsndleLogout();
+              handleLogout();
             }}
             className={`flex ${
               activeTab === "logout"

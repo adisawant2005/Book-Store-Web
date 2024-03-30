@@ -10,7 +10,6 @@ const App = () => {
       setTimeout(() => {
         setFrontPageDisplay(false);
         setFirstLoad(false);
-        console.log("Delayed for 1 second.");
       }, "1000");
     }
   }, [firstLoad, frontPageDisplay]);
