@@ -34,9 +34,6 @@ const Order = () => {
     sendGetRequest();
   }, [user_email]);
 
-  useEffect(() => {}, [orders]);
-  console.log(orders, "orders");
-
   const handleDeleteOrder = async (item) => {
     try {
       const apiEndpoint = "http://localhost:3000/order";
@@ -47,7 +44,6 @@ const Order = () => {
         },
       });
       dispatch(deleteOrder(response.data.orderCancled[0].order_id));
-      console.log(response.data.orderCancled[0].order_id);
     } catch (error) {
       console.log({ message: "order Page", error: error.message });
     }

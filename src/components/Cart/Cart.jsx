@@ -177,11 +177,6 @@ const Cart = () => {
     setTotalCalculated(handleTotalCalculated);
   }, [user]);
 
-  useEffect(() => {
-    setTotalNumberOfItems(handleNumberOfCartItems());
-    setTotalCalculated(handleTotalCalculated);
-  }, [cart]);
-
   const handleClick = (item) => {
     dispatch(selectedItem(item));
   };
