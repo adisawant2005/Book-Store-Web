@@ -2,18 +2,41 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginAndSignupButton from "./LoginAndSignupButton";
 import AccountLogo from "./AccountLogo";
+import axios from "axios";
+import { updateItems } from "../../store/items";
 import { useSelector, useDispatch } from "react-redux";
 import { PiShoppingCartDuotone } from "react-icons/pi";
 import { IoReorderThree } from "react-icons/io5";
 import { IoMdSearch } from "react-icons/io";
 
 const Header = ({ handleSidebarDisable }) => {
+  const dispatch = useDispatch();
   const accountData = useSelector((state) => state.account.data);
+  const items = useSelector((state) => state.items.items);
+  const apiEndpoint = "http://localhost:3000/items/search-items";
   const [userLogin, setUserLogin] = useState();
+  const [search, setSearch] = useState("");
+
+  const fetchSearchedData = async (search_text) => {
+    try {
+      const response = await axios.get(apiEndpoint, {
+        params: { search_text: search_text },
+      });
+      dispatch(updateItems(response.data.items));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
     setUserLogin(accountData.success);
-  }, [accountData]);
+    fetchSearchedData(search);
+  }, [accountData, search]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
 
   return (
     <nav className=" w-full bg-slate-700">
@@ -34,6 +57,8 @@ const Header = ({ handleSidebarDisable }) => {
             <input
               type="text"
               id="searchBar"
+              value={search}
+              onChange={handleSearch}
               placeholder="Enter the book you NEED"
               className="rounded-s-sm px-2 text-2xl w-full outline-none"
             />

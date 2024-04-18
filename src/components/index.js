@@ -10,7 +10,7 @@ import Authentication from "./Authentication/Authentication";
 import FAQs from "./FAQs/FAQs";
 import About from "./About/About";
 import CustomerCare from "./CustomerCare/CustomerCare";
-import BookStoreStartPage from "./BookStoreStartPage/BookStoreStartPage";
+import StartingPage from "./StartingPage/StartingPage";
 import AccountPage from "./AccountPage/AccountPage";
 import ItemPage from "./ItemPage/ItemPage";
 
@@ -27,7 +27,7 @@ export {
   About,
   FAQs,
   CustomerCare,
-  BookStoreStartPage,
+  StartingPage,
   AccountPage,
   ItemPage,
 };

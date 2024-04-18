@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Header, Footer, Sidebar, BookStoreStartPage } from "./index";
+import { Header, Footer, Sidebar, StartingPage } from "./index";
 import { Outlet } from "react-router-dom";
 const App = () => {
   const [frontPageDisplay, setFrontPageDisplay] = useState(true);
@@ -25,7 +25,7 @@ const App = () => {
   };
 
   if (firstLoad) {
-    return <BookStoreStartPage />;
+    return <StartingPage />;
   } else {
     return (
       <div className="h-screen flex flex-col">
