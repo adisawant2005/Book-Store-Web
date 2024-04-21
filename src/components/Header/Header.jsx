@@ -13,10 +13,10 @@ const Header = ({ handleSidebarDisable }) => {
   const dispatch = useDispatch();
   const accountData = useSelector((state) => state.account.data);
   const items = useSelector((state) => state.items.items);
-  const apiEndpoint = "http://localhost:3000/items/search-items";
   const [userLogin, setUserLogin] = useState();
   const [search, setSearch] = useState("");
 
+  const apiEndpoint = "http://localhost:3000/items/search-items";
   const fetchSearchedData = async (search_text) => {
     try {
       const response = await axios.get(apiEndpoint, {

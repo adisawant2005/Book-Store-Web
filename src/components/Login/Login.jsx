@@ -58,7 +58,7 @@ const Login = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-28 w-auto"
-          src={import.meta.env.VITE_ROOT_PATH + "/BookLogo.webp"}
+          src={import.meta.env.VITE_ROOT_PATH + "/devImages/BookLogo.png"}
           alt="Your Company"
         />
 

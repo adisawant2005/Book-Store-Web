@@ -13,6 +13,9 @@ import CustomerCare from "./CustomerCare/CustomerCare";
 import StartingPage from "./StartingPage/StartingPage";
 import AccountPage from "./AccountPage/AccountPage";
 import ItemPage from "./ItemPage/ItemPage";
+import SellerPage from "./SellerPage/SellerPage";
+import PutItemOnSale from "./SellerPage/PutItemOnSale";
+import UpdateItemOnSale from "./SellerPage/UpdateItemOnSale";
 
 export {
   Header,
@@ -30,4 +33,7 @@ export {
   StartingPage,
   AccountPage,
   ItemPage,
+  SellerPage,
+  PutItemOnSale,
+  UpdateItemOnSale,
 };

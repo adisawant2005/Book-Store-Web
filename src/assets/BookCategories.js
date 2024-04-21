@@ -1,0 +1,28 @@
+const bookCategories = [
+  "Fiction",
+  "Non-fiction",
+  "Poetry",
+  "Drama/Plays",
+  "Children's Books",
+  "Reference Books",
+  "Religious/Spiritual",
+  "Academic/Textbooks",
+  "Art/Photography",
+  "Graphic Novels/Comics",
+  "Biography",
+  "Autobiography",
+  "Memoir",
+  "History",
+  "Self-help",
+  "Science",
+  "Travel",
+  "Cookbooks",
+  "Mystery",
+  "Romance",
+  "Thriller",
+  "Horror",
+  "Fantasy",
+  "Science Fiction",
+];
+
+export default bookCategories;

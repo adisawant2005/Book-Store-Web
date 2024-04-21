@@ -6,6 +6,7 @@ import countryList from "../../assets/countryList";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAccountData } from "../../store/account";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { handleFileChange } from "../../modules/index";
 
 const AccountPage = () => {
   const accountData = useSelector((state) => state.account.data.result);
@@ -14,13 +15,12 @@ const AccountPage = () => {
   const [data, updateData] = useState(accountData);
   const [file, setFile] = useState(null);
   const [updating, setUpdating] = useState(false);
+  const [image, setImage] = useState(
+    accountData.profile_picture_address || "/devImages/dummyProfileImage.jpg"
+  );
 
   const handleChange = (e) => {
     updateData({ ...data, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
   };
 
   const handleUpdate = async (e) => {
@@ -41,6 +41,7 @@ const AccountPage = () => {
       });
 
       try {
+        console.log(formDataToUpdate);
         // Making a PUT request using Axios to upload the file and send form data
         const response = await axios.put(apiEndpoint, formDataToUpdate, {
           headers: {
@@ -49,6 +50,11 @@ const AccountPage = () => {
         });
 
         if (response.data.success) {
+          console.log(response.data);
+          setImage(
+            response.data.result.profile_picture_address ||
+              "/devImages/dummyProfileImage.jpg"
+          );
           dispatch(updateAccountData(response.data));
         } else {
           console.error({
@@ -86,16 +92,28 @@ const AccountPage = () => {
           <span className="ms-4 text-2xl font-bold mb-4">User Information</span>
           <div className="bg-gray-100 p-4 flex justify-center items-center">
             {updating ? (
-              <div className=" m-3">
-                <label htmlFor="avatar">
-                  Profile Picture:&nbsp;
+              <div className=" m-3 ">
+                <div
+                  className="m-3 bg-no-repeat bg-center bg-contain w-80 h-80 "
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                    backgroundImage: image
+                      ? `url(${image})`
+                      : `url("/devImages/dummyProfileImage.jpg")`,
+                  }}
+                >
                   <input
                     type="file"
                     name="avatar"
-                    onChange={handleFileChange}
-                    className="outline-none py-1 px-2 w-[100%] border-2 borser-sky-800 "
+                    accept="image/png, image/jpeg"
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                      handleFileChange(e, setImage);
+                    }}
+                    className="w-full h-full outline-0 border-4 opacity-0 border-blue-500 rounded-md"
                   />
-                </label>
+                </div>
+                <label htmlFor="avatar">Profile Picture:&nbsp;</label>
               </div>
             ) : (
               <img

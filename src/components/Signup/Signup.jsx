@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import countryList from "../../assets/countryList";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -43,7 +44,8 @@ const SignUp = () => {
     }
   };
 
-  const [file, setFile] = useState(null);
+  const [fileContent, setFileContent] = useState(null);
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -64,7 +66,7 @@ const SignUp = () => {
     // Create a FormData object
     const formDataToSend = new FormData();
 
-    formDataToSend.append("avatar", file);
+    formDataToSend.append("avatar", fileContent);
 
     Object.entries(formData).forEach(([key, value]) => {
       formDataToSend.append(key, value);
@@ -97,13 +99,30 @@ const SignUp = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  const handleFileChange = (event) => {
+    const imageFile = event.target.files[0];
+    setFileContent(event.target.files[0]);
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const content = e.target.result;
+      setImage(content);
+    };
+
+    reader.readAsDataURL(imageFile);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-300">
-      <div className="bg-white md:w-[80%] w-[100%] p-8 rounded shadow-md">
+    <div className="min-h-screen flex bg-gray-300">
+      <div className="basis-1/12 flex">
+        <button
+          onClick={() => navigate("/")}
+          className="btn py-1 px-2 mt-10 mx-auto h-12 bg-sky-500 text-white rounded-md"
+        >
+          <IoMdArrowRoundBack size={"2em"} />
+        </button>
+      </div>
+      <div className="basis-11/12 my-auto me-8 bg-white p-8 rounded shadow-md">
         <div className="flex flex-col">
           <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
           <span className="text-red-500 text-sm">
@@ -117,19 +136,29 @@ const SignUp = () => {
           onSubmit={handleSubmit}
         >
           <div className="mb-4">
+            <div
+              className=" bg-no-repeat bg-center bg-contain w-48 h-48 "
+              style={{
+                backgroundRepeat: "no-repeat",
+                backgroundImage: image
+                  ? `url(${image})`
+                  : `url("/devImages/dummyProfileImage.jpg")`,
+              }}
+            >
+              <input
+                type="file"
+                name="avatar"
+                accept="image/png, image/jpeg"
+                onChange={handleFileChange}
+                className="w-full h-full outline-0 w-full border-4 opacity-0 border-blue-500 rounded-md"
+              />
+            </div>
             <label
               htmlFor="avatar"
               className="block text-sm font-medium text-gray-600"
             >
-              Profile picture
+              Your profile picture
             </label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              onChange={handleFileChange}
-              className="p-2 w-full border-4 border-blue-500 rounded-md"
-            />
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div className="mb-4">

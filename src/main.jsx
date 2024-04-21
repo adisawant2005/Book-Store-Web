@@ -16,6 +16,9 @@ import {
   CustomerCare,
   AccountPage,
   ItemPage,
+  SellerPage,
+  PutItemOnSale,
+  UpdateItemOnSale,
 } from "./components";
 
 const router = createBrowserRouter([
@@ -50,6 +53,18 @@ const router = createBrowserRouter([
       {
         path: "/order",
         element: <Order />,
+      },
+      {
+        path: "/sellerpage",
+        element: <SellerPage />,
+      },
+      {
+        path: "/sell_item_page",
+        element: <PutItemOnSale />,
+      },
+      {
+        path: "/update_item_page",
+        element: <UpdateItemOnSale />,
       },
       {
         path: "/faqs",

@@ -11,6 +11,7 @@ import { TbLogout, TbLogin2 } from "react-icons/tb";
 import { VscSignIn } from "react-icons/vsc";
 import { FaQuoteRight } from "react-icons/fa6";
 import { LuBookMarked } from "react-icons/lu";
+import { GiSellCard } from "react-icons/gi";
 
 const Sidebar = ({ disable }) => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const Sidebar = ({ disable }) => {
     >
       <Link to="/" className="flex items-center mb-3 text-white font-medium">
         <img
-          src={import.meta.env.VITE_ROOT_PATH + "/BookLogo.webp"}
+          src={import.meta.env.VITE_ROOT_PATH + "/devImages/BookLogo.png"}
           alt="Side Bar Image"
           className="w-12"
         />
@@ -118,6 +119,22 @@ const Sidebar = ({ disable }) => {
               <FaRegUser />
             </span>
             &nbsp; Account
+          </Link>
+        </li>
+        <li className="">
+          <Link
+            to="/sellerpage"
+            onClick={() => setActiveTab("sellerPage")}
+            className={`flex ${
+              activeTab === "sellerPage"
+                ? "text-white font-semibold"
+                : "text-slate-100"
+            }`}
+          >
+            <span className="mt-1">
+              <GiSellCard />
+            </span>
+            &nbsp; Sell Books
           </Link>
         </li>
         <li>
