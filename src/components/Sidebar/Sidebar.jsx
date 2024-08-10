@@ -45,7 +45,7 @@ const Sidebar = ({ disable }) => {
     <div
       className={`${
         disable ? "hidden" : "block"
-      } flex flex-col w-56 p-3 mb-0 h-screen bg-slate-700`}
+      } flex flex-col w-56 p-3 mb-0 h-[100%] bg-slate-700`}
     >
       <Link to="/" className="flex items-center mb-3 text-white font-medium">
         <img
