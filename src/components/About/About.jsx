@@ -2,52 +2,68 @@ import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <main className="bg-[url(https://images.unsplash.com/photo-1623771702313-39dc4f71d275?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] bg-no-repeat bg-opacity-40">
-      <div className=" text-purple-700 ">
-        <h1 className="text-8xl">THANKS VISITING THIS PAGE</h1>
+    <main className=" font-cursive ">
+      <img
+        src="Book_Store_Pic.jpg"
+        className="z-[-10] opacity-80 absolute w-full h-[100vh] bg-cover bg-no-repeat bg-center"
+        alt=""
+      />
+      <h1 className="text-4xl text-center font-bold underline text-purple-700">
+        About this E-Bookstore Website Project
+      </h1>
+      <div className="w-3/4 mx-auto mt-10">
+        <h2 className="text-3xl font-bold mx-50">
+          📚 E-Book Store Project - Powered by PERN Stack 🚀
+        </h2>
         <div className="text-2xl">
-          <p className="text-5xl">
-            This work is going to be completed by Siddhesh & Atharva
+          <p>Welcome to my latest project: E-Book Store!</p>
+          <p>This project is a work in progress.</p>
+          <p>
+            I’m excited to share the progress on my latest project: E-Book
+            Store! Currently in its dummy phase, this application is built using
+            the PERN stack—PostgreSQL, Express.js, React.js, and Node.js.
           </p>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
-          <h3>Sayonara</h3>
         </div>
+        <hr />
+        <div className="text-2xl">
+          <p>🔧 Features:</p>
+          <p>
+            <strong>User Authentication:</strong>Secure log in and sign up to
+            access the store.
+          </p>
+          <p>
+            <strong>Book Sales:</strong> Users can put their e-books on sale and
+            manage them effortlessly.
+          </p>
+          <p>
+            <strong>Item Management:</strong> Update and view all the books that
+            are currently on sale.
+          </p>
+          <p>
+            <strong>Profile Management:</strong> Update your account details and
+            profile picture.
+          </p>
+          <p>
+            <strong>Cart Management:</strong> Add and remove books from the
+            cart.
+          </p>
+          <p>
+            <strong>Order Management:</strong> View and manage your orders.
+          </p>
+          <p>
+            <strong>Purchasing:</strong>
+            Browse and buy books seamlessly.
+          </p>
+          <p>
+            <strong>Payment:</strong> Do payments with multiple payment methods.
+          </p>
+        </div>
+        <hr />
+        <p className="text-2xl">
+          This project is a work in progress, and I’m excited about the
+          potential it holds. Stay tuned for more updates!
+          <span className="invert">✨</span>
+        </p>
       </div>
     </main>
   );

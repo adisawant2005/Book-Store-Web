@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addItemOnSale } from "../../store/items";
 import axios from "axios";
-import BookCategories from "../../assets/BookCategories";
 import { useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { nanoid } from "nanoid";

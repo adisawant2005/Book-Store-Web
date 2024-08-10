@@ -28,7 +28,10 @@ const App = () => {
     return <StartingPage />;
   } else {
     return (
-      <div className="h-screen flex flex-col">
+      <div
+        className="h-screen flex flex-col"
+        style={{ scrollbarWidth: "none" }}
+      >
         <Header handleSidebarDisable={handleSidebarDisable} />
         <div className="flex ">
           <Sidebar disable={disableSidebar} />

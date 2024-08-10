@@ -237,7 +237,7 @@ const Sidebar = ({ disable }) => {
           </Link>
         </li>
       </ul>
-      <hr />
+      <hr className="mb-56" />
     </div>
   );
 };
