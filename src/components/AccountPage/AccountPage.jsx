@@ -93,15 +93,13 @@ const AccountPage = () => {
           <div className="bg-gray-100 p-4 flex justify-center items-center">
             {updating ? (
               <div className=" m-3 ">
-                <div
-                  className="m-3 bg-no-repeat bg-center bg-contain w-80 h-80 "
-                  style={{
-                    backgroundRepeat: "no-repeat",
-                    backgroundImage: image
-                      ? `url(${image})`
-                      : `url("/devImages/dummyProfileImage.jpg")`,
-                  }}
-                >
+                <div className="m-3 w-80 h-80 ">
+                  <img
+                    src={image ? image : "/devImages/dummyProfileImage.jpg"}
+                    className="justify-self-center mx-auto  w-full h-full"
+                    alt="profile picture"
+                  />
+                  {console.log(image)}
                   <input
                     type="file"
                     name="avatar"
