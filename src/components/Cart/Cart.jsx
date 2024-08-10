@@ -287,7 +287,7 @@ const Cart = () => {
               ))}
             </ul>
           ) : (
-            <span className="block text-3xl text-center m-10 text-slate-400">
+            <span className="block font-bold text-3xl text-center m-10 text-slate-400">
               {userLogin
                 ? "Your Cart is empty"
                 : "Please log in to add items in cart"}

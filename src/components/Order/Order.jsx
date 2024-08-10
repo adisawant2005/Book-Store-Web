@@ -147,7 +147,7 @@ const Order = () => {
                 </div>
               ))
             ) : (
-              <div className="text-3xl text-center m-10 text-slate-400">
+              <div className="font-bold text-3xl text-center m-10 text-slate-400">
                 you didn't order anything
               </div>
             )}

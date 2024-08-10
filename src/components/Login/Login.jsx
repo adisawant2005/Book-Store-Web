@@ -4,6 +4,7 @@ import Spinner from "../Spinner/Spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getAccountData } from "../../store/account";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [queryParams, setQueryParams] = useState({
@@ -136,6 +137,15 @@ const Login = () => {
             </span>
           </div>
         </form>
+        <span className="block mt-6 text-center text-slate-600">
+          Don't have a account?&nbsp;
+          <Link
+            to="/signup"
+            className="text-indigo-600 hover:text-indigo-700 font-semibold hover:font-bold hover:underline"
+          >
+            Sign up
+          </Link>
+        </span>
       </div>
     </div>
   );

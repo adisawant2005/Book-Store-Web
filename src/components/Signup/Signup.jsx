@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import countryList from "../../assets/countryList";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ const SignUp = () => {
     if (passwordsMatch) {
       try {
         // Making a POST request using Axios to upload the file and send form data
+        console.log(formDataToSend);
         const response = await axios.post(apiEndpoint, formDataToSend, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -161,7 +163,7 @@ const SignUp = () => {
             </label>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <div className="mb-4">
+            <div name="first_name" className="mb-4">
               <label
                 htmlFor="first_name"
                 className="block text-sm font-medium text-gray-600"
@@ -178,7 +180,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div name="last_name" className="mb-4">
               <label
                 htmlFor="last_name"
                 className="block text-sm font-medium text-gray-600"
@@ -195,7 +197,24 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div name="email" className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
+                required
+              />
+            </div>
+            <div name="birthdate" className="mb-4">
               <label
                 htmlFor="birthdate"
                 className="block text-sm font-medium text-gray-600"
@@ -214,7 +233,56 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-4 ">
+            <div name="country" className="mb-4">
+              <label
+                htmlFor="country"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Country
+              </label>
+              <select
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Enter your country"
+                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
+                required
+              >
+                <option value="" disabled>
+                  Please choose one option
+                </option>
+                {Object.entries(countryList).map(([key, value]) => (
+                  <option key={key}> {key}</option>
+                ))}
+              </select>
+            </div>
+            <div name="city" className="mb-4">
+              <label
+                htmlFor="city"
+                className="block text-sm font-medium text-gray-600"
+              >
+                City
+              </label>
+              <select
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
+                required
+              >
+                <option value="" disabled>
+                  Please choose one option
+                </option>
+                {Object.entries(
+                  formData.country && countryList[formData.country]
+                ).map(([key, value]) => (
+                  <option key={nanoid()}> {value}</option>
+                ))}
+              </select>
+            </div>
+            <div name="gender" className="mb-4 ">
               <span className="block text-sm font-medium text-gray-600">
                 Gender
               </span>
@@ -256,73 +324,7 @@ const SignUp = () => {
                 </label>
               </div>
             </div>
-            <div className="mb-4">
-              <label
-                htmlFor="country"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Country
-              </label>
-              <select
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                placeholder="Enter your country"
-                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
-                required
-              >
-                <option value="" disabled>
-                  Please choose one option
-                </option>
-                {Object.entries(countryList).map(([key, value]) => (
-                  <option key={key}> {key}</option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="city"
-                className="block text-sm font-medium text-gray-600"
-              >
-                City
-              </label>
-              <select
-                id="city"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
-                required
-              >
-                <option value="" disabled>
-                  Please choose one option
-                </option>
-                {Object.entries(
-                  formData.country && countryList[formData.country]
-                ).map(([key, value]) => (
-                  <option key={nanoid()}> {value}</option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
-                required
-              />
-            </div>
-            <div className="mb-4">
+            <div name="password" className="mb-4">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-600"
@@ -339,7 +341,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div name="confirmPassword" className="mb-4">
               <label
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-600"
@@ -359,41 +361,7 @@ const SignUp = () => {
                 {passwordsMatch ? "" : "password did not match"}
               </span>
             </div>
-            <div className="mb-4">
-              <label
-                htmlFor="street_address"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Street Address
-              </label>
-              <input
-                type="text"
-                id="street_address"
-                name="street_address"
-                value={formData.street_address}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="postal_code"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Postal Code
-              </label>
-              <input
-                type="number"
-                id="postal_code"
-                name="postal_code"
-                value={formData.postal_code}
-                onChange={handleChange}
-                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
-                required
-              />
-            </div>
-            <div className="mb-4">
+            <div name="phone_number" className="mb-4">
               <label
                 htmlFor="phone_number"
                 className="block text-sm font-medium text-gray-600"
@@ -412,8 +380,42 @@ const SignUp = () => {
                 required
               />
             </div>
+            <div name="street_address" className="mb-4">
+              <label
+                htmlFor="street_address"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Street Address
+              </label>
+              <input
+                type="text"
+                id="street_address"
+                name="street_address"
+                value={formData.street_address}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
+                required
+              />
+            </div>
+            <div name="postal_code" className="mb-4">
+              <label
+                htmlFor="postal_code"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Postal Code
+              </label>
+              <input
+                type="number"
+                id="postal_code"
+                name="postal_code"
+                value={formData.postal_code}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border-4 border-blue-500 rounded-md outline-none"
+                required
+              />
+            </div>
           </div>
-          <div className="flex flex-col">
+          <div name="submit" className="flex flex-col">
             <button
               type="submit"
               className="bg-blue-700 btn text-white px-4 py-2 rounded-md"
@@ -425,6 +427,15 @@ const SignUp = () => {
             </span>
           </div>
         </form>
+        <span className="block mt-6 text-center text-slate-600">
+          Have a account?&nbsp;
+          <Link
+            to="/login"
+            className="text-indigo-600 hover:text-indigo-700 font-semibold hover:font-bold hover:underline"
+          >
+            Log in
+          </Link>
+        </span>
       </div>
     </div>
   );
