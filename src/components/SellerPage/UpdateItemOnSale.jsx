@@ -140,12 +140,17 @@ const UpdateItemOnSale = () => {
                 >
                   Book description
                 </label>
-                <input
-                  type="text"
+                <textarea
                   name="item_description"
                   value={itemDetails.item_description}
                   onChange={handleChange}
-                  className="inline w-[300px] mt-1 p-2 border-4 border-blue-500 rounded-md outline-none"
+                  className="inline w-[300px] mt-1 p-2 border-4 border-blue-500 rounded-md outline-none "
+                  style={{
+                    height: "100px",
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "#f4f6f6 white",
+                    scrollBehavior: "smooth",
+                  }}
                   required
                 />
               </div>

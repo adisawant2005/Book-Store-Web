@@ -106,7 +106,16 @@ const SellerPage = () => {
                           <span className="text-stone-900 font-semibold">
                             Item description : &nbsp;
                           </span>
-                          {item.item_description}
+                          <textarea
+                            value={item.item_description}
+                            className="w-full h-16"
+                            style={{
+                              height: "75px",
+                              scrollbarWidth: "thin",
+                              scrollbarColor: "#f4f6f6 white",
+                              scrollBehavior: "smooth",
+                            }}
+                          />
                         </span>
 
                         <span className="text-stone-800">

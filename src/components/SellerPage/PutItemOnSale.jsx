@@ -16,6 +16,7 @@ const PutItemOnSale = () => {
 
   const [fileContent, setFileContent] = useState(undefined);
   const [image, setImage] = useState(null);
+  const [imageName, setImageName] = useState("");
   const [itemDetails, setItemDetails] = useState({
     user_email: accountDetails.email,
     user_password: accountDetails.password,
@@ -105,6 +106,9 @@ const PutItemOnSale = () => {
                   accept="image/png, image/jpeg"
                   onChange={(e) => {
                     setFileContent(e.target.files[0]);
+                    setImageName(e.target.files[0].name);
+                    // console.log(e.target.files[0]);
+                    // console.log(e.target.files[0].name);
                     handleFileChange(e, setImage);
                   }}
                   className="w-full h-full outline-0 border-4 opacity-0 border-blue-500 rounded-md"
@@ -114,7 +118,7 @@ const PutItemOnSale = () => {
                 htmlFor="item_image"
                 className="block px-20 text-md font-medium text-gray-600"
               >
-                Insert Your Book's Image
+                <span>{image ? imageName : "Insert Your Book's Image"}</span>
               </label>
             </div>
             <div className="grid grid-cols-1 gap-4 content-center">
@@ -141,12 +145,17 @@ const PutItemOnSale = () => {
                 >
                   Book description
                 </label>
-                <input
-                  type="text"
+                <textarea
                   name="item_description"
                   value={itemDetails.item_description}
                   onChange={handleChange}
                   className="inline w-[300px] mt-1 p-2 border-4 border-blue-500 rounded-md outline-none"
+                  style={{
+                    height: "100px",
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "#f4f6f6 white",
+                    scrollBehavior: "smooth",
+                  }}
                   required
                 />
               </div>
