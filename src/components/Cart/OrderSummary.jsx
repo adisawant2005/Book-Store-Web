@@ -1,7 +1,9 @@
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import delivery_location from "../../assets/delivery_location";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCartItems } from "../../store/cart";
+import { useNavigate } from "react-router-dom";
 
 function OrderSummary({
   proceedToCheckOut,
@@ -9,7 +11,8 @@ function OrderSummary({
   user,
   cart,
   cart_items,
-  totalCalculated,
+  totalCalculatedCost,
+  setTotalCalculatedCost,
   orderDetails,
   handleOrderDetails,
   delivery_location,
@@ -18,7 +21,10 @@ function OrderSummary({
   UPIid,
   userLogin,
   setProceedToCheckOut,
+  showStickyMessageHandler,
 }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentDate = new Date();
 
   const matchingLocations = delivery_location.filter(
@@ -61,7 +67,7 @@ function OrderSummary({
     setCurrentDeliveryLocation((state) =>
       matchingLocations.length > 0 ? matchingLocations[0] : state
     );
-  }, [orderDetails]);
+  }, [orderDetails, cart]);
 
   const handlePlaceOrder = () => {
     if (orderDetails.shipping_address !== "") {
@@ -83,17 +89,27 @@ function OrderSummary({
         console.log("Ready to POST cash details");
         handleOrderForEachItem(cart_items);
       } else {
-        console.log("Please fill all the payment details");
+        // console.log("Please fill all the payment details");
+        showStickyMessageHandler(
+          <>
+            <strong>Please fill all the payment details</strong>
+          </>
+        );
       }
     } else {
-      console.log("Please fill the address");
+      //   console.log("Please fill the address");
+      showStickyMessageHandler(
+        <>
+          <strong>Please fill the address</strong>
+        </>
+      );
     }
   };
 
   const handleOrderForEachItem = (cart_items) => {
     cart_items.forEach(async (item) => {
       const shipping_cost =
-        totalCalculated.totalShippingCost === 0
+        totalCalculatedCost.totalShippingCost === 0
           ? 0
           : orderDetails.shipping_cost;
       const itemDetails = {
@@ -112,10 +128,39 @@ function OrderSummary({
         console.log("oreder page");
         const response = await axios.post(apiEndpoint, itemDetails);
         console.log(response.data);
+        showStickyMessageHandler(
+          <>
+            <strong>Order Placed Successfully</strong>
+          </>
+        );
+        setTimeout(() => navigate("/order"), 3000);
+        setTotalCalculatedCost((prev) => {
+          return {
+            ...prev,
+            totalItemsPrice: 0,
+            totalTax: 0,
+            totalCostAfterGST: 0,
+            totalShippingCost: 0,
+          };
+        });
       } catch (error) {
         console.error({ error: error.message, message: "order summery page" });
       }
     });
+
+    const deleteItemsFromCart = async () => {
+      try {
+        const apiEndpoint = "http://localhost:3000/cart";
+        const userDetails = { customer_email: user.email, delete_all: true };
+        console.log(userDetails);
+        const response = await axios.delete(apiEndpoint, { data: userDetails });
+        console.log(response.data);
+        dispatch(deleteCartItems());
+      } catch (error) {
+        console.error({ error: error.message, message: "cart summery page" });
+      }
+    };
+    deleteItemsFromCart();
   };
 
   return (
@@ -140,27 +185,27 @@ function OrderSummary({
                   <span className="flex justify-between  font-medium text-lg text-gray-600">
                     Cost of items :&nbsp;
                     <span className="inline-block text-slate-900">
-                      ₹{totalCalculated.totalItemsPrice}
+                      ₹{totalCalculatedCost.totalItemsPrice}
                     </span>
                   </span>
                   <span className="flex justify-between  font-medium text-lg text-gray-600">
                     Total tax ({orderDetails.tax_rate}% GST) :&nbsp;
                     <span className="inline-block text-slate-900">
-                      ₹{totalCalculated.totalTax}
+                      ₹{totalCalculatedCost.totalTax}
                     </span>
                   </span>
                   <span className="flex justify-between  font-medium text-lg text-gray-600">
                     Shipping cost :&nbsp;
                     <span className="inline-block text-slate-900">
-                      ₹{totalCalculated.totalShippingCost}
+                      ₹{totalCalculatedCost.totalShippingCost}
                     </span>
                   </span>
                   <span className="flex justify-between  font-medium text-lg text-gray-600">
                     Order total :&nbsp;
                     <span className="inline-block text-slate-900">
                       ₹
-                      {totalCalculated.totalCostAfterGST +
-                        totalCalculated.totalShippingCost}
+                      {totalCalculatedCost.totalCostAfterGST +
+                        totalCalculatedCost.totalShippingCost}
                     </span>
                   </span>
                 </div>
@@ -350,7 +395,7 @@ function OrderSummary({
                 </span>
                 <span className="inline-block">
                   {" "}
-                  ₹ {totalCalculated.totalItemsPrice}
+                  ₹ {totalCalculatedCost.totalItemsPrice}
                 </span>
               </div>
             </div>

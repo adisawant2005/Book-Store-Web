@@ -16,6 +16,7 @@ import ItemPage from "./ItemPage/ItemPage";
 import SellerPage from "./SellerPage/SellerPage";
 import PutItemOnSale from "./SellerPage/PutItemOnSale";
 import UpdateItemOnSale from "./SellerPage/UpdateItemOnSale";
+import StickyMessage from "./StickyMessage/StickyMessage";
 
 export {
   Header,
@@ -36,4 +37,5 @@ export {
   SellerPage,
   PutItemOnSale,
   UpdateItemOnSale,
+  StickyMessage,
 };

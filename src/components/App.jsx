@@ -29,7 +29,7 @@ const App = () => {
   } else {
     return (
       <div
-        className="h-screen flex flex-col"
+        className="h-screen flex flex-col relative"
         style={{ scrollbarWidth: "none" }}
       >
         <Header handleSidebarDisable={handleSidebarDisable} />

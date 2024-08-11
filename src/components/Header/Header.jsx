@@ -14,15 +14,17 @@ const Header = ({ handleSidebarDisable }) => {
   const accountData = useSelector((state) => state.account.data);
   const items = useSelector((state) => state.items.items);
   const [userLogin, setUserLogin] = useState();
+  const [searchText, setSearchText] = useState("");
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchBarActive, setSearchBarActive] = useState(false);
 
   useEffect(() => {
     setUserLogin(accountData.success);
     console.log(searchedItems);
-  }, [accountData, searchedItems]);
+  }, [accountData, searchText]);
 
   const handleSearchText = async (e) => {
+    setSearchText(e.target.value);
     if (e.target.value.length > 0) {
       setSearchBarActive(true);
       // console.log(searchBarActive);
@@ -48,6 +50,8 @@ const Header = ({ handleSidebarDisable }) => {
 
   const handleSearchClick = (item) => {
     dispatch(selectedItem(item));
+    setSearchText("");
+    setSearchBarActive(false);
   };
 
   return (
@@ -73,9 +77,9 @@ const Header = ({ handleSidebarDisable }) => {
               <input
                 type="text"
                 id="searchTextBar"
-                // value={searchText}
+                value={searchText}
                 onChange={handleSearchText}
-                placeholder="Enter the book you NEED"
+                placeholder="Search the books here"
                 className="rounded-s-sm px-1 text-2xl w-full outline-none"
               />
               <label htmlFor="searchTextBar">

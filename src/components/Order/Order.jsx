@@ -13,6 +13,12 @@ const Order = () => {
 
   const user_email = useSelector((state) => state.account.data.result.email);
   const orders = useSelector((state) => state.orders.orderedItems) || "";
+  const sortedOrders = [...orders].sort(
+    (a, b) => new Date(b.order_date) - new Date(a.order_date)
+  );
+  sortedOrders.forEach((item) => {
+    console.log(item.order_date);
+  });
 
   const queryParams = {
     customer_email: user_email,
@@ -65,8 +71,9 @@ const Order = () => {
             <h1 className="mx-4">Orders</h1>
           </div>
           <div>
-            {orders.length !== 0 ? (
-              orders.map((item) => (
+            {console.log(orders)}
+            {sortedOrders.length !== 0 ? (
+              sortedOrders.map((item) => (
                 <div
                   key={nanoid()}
                   name="ordered_item_template"
@@ -74,12 +81,12 @@ const Order = () => {
                 >
                   <div
                     name="product_image"
-                    className="col-span-2 text-center border-4 h-52 rounded-xl"
+                    className="col-span-2 my-auto text-center h-52"
                   >
                     <img
                       src={item.product_image_address}
                       alt="product_image_address"
-                      className="max-h-48 max-w-48 m-auto justify-self-center"
+                      className="max-h-52 max-w-52 mx-auto justify-self-center"
                     />
                   </div>
                   <div
@@ -94,11 +101,17 @@ const Order = () => {
                         {item.product_name}
                       </span>
                     </span>
-                    <span className="block text-stone-500">
-                      {"Decsription :"}&nbsp;
-                      <span className="block p-auto text-stone-800 text-ellipsis overflow-y-auto">
-                        {item.product_description}
-                      </span>
+                    <span className="flex block text-stone-500">
+                      <span>{"Decsription :"}&nbsp;</span>
+                      <textarea
+                        value={item.product_description}
+                        className="w-[80%] h-16 text-md text-stone-800"
+                        style={{
+                          scrollbarWidth: "thin",
+                          scrollbarColor: "#f4f6f6 white",
+                          scrollBehavior: "smooth",
+                        }}
+                      />
                     </span>
                     <span className="block text-stone-500">
                       Order ID :&nbsp;
