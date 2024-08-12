@@ -85,7 +85,7 @@ const SignUp = () => {
 
         if (response.data.success) {
           setAccountExits(true);
-          navigate("/");
+          navigate("/login");
         } else if (!response.data.success) {
           setAccountExits(false);
         }

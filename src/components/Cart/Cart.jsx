@@ -183,7 +183,7 @@ const Cart = () => {
     getCartItems();
     setTotalNumberOfItems(handleNumberOfCartItems());
     setTotalCalculatedCost(handleTotalCalculatedCost);
-  }, [user]);
+  }, [user, cart]);
 
   // useEffect(() => {
   // }, [cart_items]);
