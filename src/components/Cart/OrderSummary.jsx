@@ -67,7 +67,7 @@ function OrderSummary({
     setCurrentDeliveryLocation((state) =>
       matchingLocations.length > 0 ? matchingLocations[0] : state
     );
-  }, [orderDetails, cart]);
+  }, [orderDetails, useSelector((state) => state.cart.cart_items)]);
 
   const handlePlaceOrder = () => {
     if (orderDetails.shipping_address !== "") {

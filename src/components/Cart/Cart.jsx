@@ -32,6 +32,10 @@ const Cart = () => {
   const items = useSelector((state) => state.items.items);
   const cart = useSelector((state) => state.cart.cart_items);
 
+  /* to rerender the cart if the item quantity changes */
+  const [cart_checkState, setCart_checkState] = useState();
+  let cart_check;
+
   const cart_items = items
     .filter((item) =>
       cart.some((cartItem) => cartItem.product_id === item.item_id)
@@ -162,6 +166,11 @@ const Cart = () => {
     });
 
   useEffect(() => {
+    setTotalNumberOfItems(handleNumberOfCartItems());
+    setTotalCalculatedCost(handleTotalCalculatedCost);
+  }, [cart]);
+
+  useEffect(() => {
     const getCartItems = async () => {
       if (userLogin) {
         const apiEndpoint = "http://localhost:3000/cart";
@@ -181,12 +190,7 @@ const Cart = () => {
     };
 
     getCartItems();
-    setTotalNumberOfItems(handleNumberOfCartItems());
-    setTotalCalculatedCost(handleTotalCalculatedCost);
-  }, [user, cart]);
-
-  // useEffect(() => {
-  // }, [cart_items]);
+  }, [user]);
 
   const handleClick = (item) => {
     dispatch(selectedItem(item));

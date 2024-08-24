@@ -20,7 +20,7 @@ const Header = ({ handleSidebarDisable }) => {
 
   useEffect(() => {
     setUserLogin(accountData.success);
-    console.log(searchedItems);
+    // console.log(searchedItems);
   }, [accountData, searchText]);
 
   const handleSearchText = async (e) => {

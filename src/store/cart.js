@@ -25,6 +25,9 @@ export const cartSlice = createSlice({
       }
     },
     updateCartItems: (state, action) => {
+      if ((state.cart_items = action.payload)) {
+        return;
+      }
       state.cart_items = action.payload;
     },
     deleteCartItem: (state, action) => {
