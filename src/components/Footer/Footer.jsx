@@ -6,7 +6,7 @@ const Footer = () => {
       <ul className="flex justify-center px-auto text-slate-900">
         <li className="">
           <Link
-            to="http://localhost:5173/"
+            to="/"
             className=" px-2 opacity-70 hover:pointer hover:font-bold hover:opacity-100  "
           >
             Home
@@ -14,7 +14,7 @@ const Footer = () => {
         </li>
         <li className="">
           <Link
-            to="http://localhost:5173/login"
+            to="/login"
             className=" px-2 opacity-70 hover:pointer hover:font-bold hover:opacity-100  "
           >
             Login
@@ -22,7 +22,7 @@ const Footer = () => {
         </li>
         <li className="">
           <Link
-            to="http://localhost:5173/signup"
+            to="/signup"
             className="px-2 opacity-70 hover:pointer hover:font-bold hover:opacity-100  "
           >
             Signup
@@ -30,7 +30,7 @@ const Footer = () => {
         </li>
         <li className="">
           <Link
-            to="http://localhost:5173/faqs"
+            to="/faqs"
             className=" px-2 opacity-70 hover:pointer hover:font-bold hover:opacity-100  "
           >
             FAQs
@@ -38,7 +38,7 @@ const Footer = () => {
         </li>
         <li className="">
           <Link
-            to="http://localhost:5173/about"
+            to="/about"
             className="px-2 opacity-70 hover:pointer hover:font-bold hover:opacity-100 "
           >
             About
